@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<ui:composition template="../WEB-INF/templates/padrao.xhtml">
+	<ui:define name="conteudo">
+		<h:form role="form" enctype="multipart/form-data">
+
+			<h:panelGrid rendered="#{!empty pMB.peca.id}">
+				<div class="form-group">
+					<h:outputLabel value="Código" />
+					<h:inputText styleClass="form-control" readonly="true"
+						value="#{pMB.peca.id}" />
+				</div>
+			</h:panelGrid>
+			<h:inputHidden value="#{pMB.peca.id}" />
+
+			<div class="form-group">
+				<h:outputLabel value="Nome" />
+				<h:inputText styleClass="form-control"
+					value="#{pMB.peca.nome}" />
+			</div>
+
+			<div class="form-group">
+				<h:outputLabel value="Marca" />
+				<h:selectOneMenu styleClass="form-control"
+					value="#{pMB.peca.marca}">
+					<f:selectItem itemLabel="---" />
+					<f:selectItems value="#{mMB.marcas}" var="marc"
+						itemLabel="#{marc.nome}" itemValue="#{marc}" />
+				</h:selectOneMenu>
+			</div>
+
+	<div class="form-group">
+				<h:outputLabel value="Imagem" />
+				<h:inputFile value="#{pMB.imagem}">
+					<f:validator validatorId="validator.ImagemValidator" />
+				</h:inputFile>
+				<h:inputHidden value="#{pMB.peca.imagem}" />
+				<h:graphicImage styleClass="img-responsive" rendered="#{!empty pMB.peca.imagem}"
+					value="#{pMB.getCaminhoRelativo(pMB.peca.imagem)}" />
+			</div>
+			<div class="form-group">
+				<h:outputLabel value="Valor" />
+				<h:inputText styleClass="form-control"
+					value="#{pMB.peca.valor}" />
+			</div>
+			
+				<div class="form-group">
+				<h:outputLabel value="Descrição" />
+				<h:inputTextarea styleClass="form-control"
+					value="#{pMB.peca.descricao}" />
+			</div>
+
+			
+			<h:commandButton value="Salvar" action="#{pMB.salvar}" />
+		</h:form>
+	</ui:define>
+</ui:composition>
+</html>

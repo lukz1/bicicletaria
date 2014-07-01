@@ -1,0 +1,38 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<ui:composition template="WEB-INF/templates/padrao.xhtml">
+	
+
+	<ui:define name="conteudo">
+	<ui:repeat var="pe" value="#{pMB.pecas}">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h:outputLabel value="Marca: " />
+					<h:outputText  value="#{pe.marca.nome}" />
+				</div>
+				<div class="panel-body">
+					
+					<b><h:outputText value="#{pe.nome}" /> </b>-
+					<h:graphicImage styleClass="img-responsive"
+						rendered="#{!empty pe.imagem}"
+						value="#{pMB.getCaminhoRelativo(pe.imagem)}" height="150px" width="250px"  />
+							<h:outputLabel value="valor: " />
+						<h:outputText value="#{pe.valor}" /><br />
+							<h:outputLabel value="Descrição: " />
+						<h:outputText value="#{pe.descricao}" />
+				</div>
+			</div>
+		</ui:repeat>
+	
+		<div class="panel panel-default">
+			
+		</div>
+	</ui:define>
+</ui:composition>
+</html>
